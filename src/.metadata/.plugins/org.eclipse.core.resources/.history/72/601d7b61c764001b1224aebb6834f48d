@@ -1,0 +1,51 @@
+/**
+ * 
+ */
+package seleniumAssignment.java;
+
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+/**
+ * @author Shashank
+ *
+ */
+public class test {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+		System.setProperty("webdriver.chrome.driver", "C:\\Selenium Drivers\\chromedriver.exe");
+		WebDriver driver = new ChromeDriver();
+		
+		// Login
+		driver.get("https://sakshingp.github.io/assignment/login.html");
+		driver.findElement(By.id("username")).sendKeys("Shashank");
+		driver.findElement(By.id("password")).sendKeys("Admin@123");
+		driver.findElement(By.id("log-in")).click();
+	
+		// Home Page
+		driver.findElement(By.id("amount")).click();
+		// Enetring all amounts to list
+		List<WebElement> amounts = driver.findElements(By.className("text-right"));
+		
+		//checking for sort
+		
+		System.out.println("Completed");
+		int c=0;
+		amounts.remove(0);
+		for (WebElement amount : amounts) {
+			String amt = amount.getText();
+            double prevAmount = Double.parseDouble(amt.substring(0,1)+amt.substring(2,amt.indexOf("U")-1));
+            System.out.println(prevAmount + "\t" + amt);
+        }
+	}
+
+}
